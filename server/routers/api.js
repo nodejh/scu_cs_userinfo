@@ -4,10 +4,11 @@
 
 const router = require('koa-router')();
 const api = require('../controllers/api');
+const upload = require('../controllers/upload');
 
 
 router.get('/test', api.testPage);
-router.post('/test', api.testPost);
+router.post('/upload', upload.index);
 
 
 module.exports = router;
