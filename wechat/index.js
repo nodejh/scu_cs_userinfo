@@ -29,12 +29,7 @@ app.use(views(path.join(__dirname, './views'), {
 }));
 
 
-app.use(wechat({
-  token: config.wechat.token,
-  appid: config.wechat.token.appid,
-  encodingAESKey: config.wechat.encodingAESKey,
-  checkSignature: true,
-}).middleware(async (message) => {
+app.use(wechat(config.wechat.token).middleware(async (message) => {
   console.log('message: ', message);
   // 微信输入信息就是这个 message
   if (message.FromUserName === 'diaosi') {
