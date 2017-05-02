@@ -7,7 +7,7 @@ const api = require('../controllers/api');
 const upload = require('../controllers/upload');
 
 
-router.get('/test', api.testPage);
+router.get('/grade', api.gradeList);
 router.post('/upload', upload.index);
 
 
