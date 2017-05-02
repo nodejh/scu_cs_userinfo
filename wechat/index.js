@@ -43,11 +43,11 @@ app.use(wechat(config.wechat.token).middleware(async (message) => {
       //   average_credit: 1.82,
       //   average_credit_grade: 55.97,
       //   ranking: 37
-      return `学号:${res[0].number}\n
-        平均成绩:${res[0].average_grade} \n
-        平均学分绩点:${res[0].average_credit} \n
-        加权学分成绩:${res[0].average_credit_grade} \n
-        排名:${res[0].ranking}`;
+      return `学号:${res[0].number}\n` +
+      `平均成绩:${res[0].average_grade} \n` +
+      `平均学分绩点:${res[0].average_credit} \n` +
+      `加权学分成绩:${res[0].average_credit_grade}\n` +
+      `排名:${res[0].ranking}`;
     }
     return '学号不存在';
   }
