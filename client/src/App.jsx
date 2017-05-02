@@ -16,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 
 message.config({
-  top: 100,
+  top: 75,
   duration: 3,
 });
 
@@ -42,6 +42,12 @@ class App extends Component {
                   <span className="nav-text">成绩管理</span>
                 </Link>
               </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/upload" style={{ color: '#fff' }}>
+                  <Icon type="upload" />
+                  <span className="nav-text">成绩上传</span>
+                </Link>
+              </Menu.Item>
               <Menu.Item key="3">
                 <Link to="/college" style={{ color: '#fff' }}>
                   <Icon type="idcard" />
@@ -52,12 +58,6 @@ class App extends Component {
                 <Link to="/questionnaire" style={{ color: '#fff' }}>
                   <Icon type="bar-chart" />
                   <span className="nav-text">问卷管理</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Link to="/upload" style={{ color: '#fff' }}>
-                  <Icon type="upload" />
-                  <span className="nav-text">成绩上传</span>
                 </Link>
               </Menu.Item>
             </Menu>
@@ -74,7 +74,7 @@ class App extends Component {
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-              Ant Design ©2016 Created by Ant UED
+              ©2016 Created
             </Footer>
           </Layout>
         </Layout>
