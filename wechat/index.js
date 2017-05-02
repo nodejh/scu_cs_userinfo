@@ -37,8 +37,17 @@ app.use(wechat(config.wechat.token).middleware(async (message) => {
     const sql = 'select * from grade where number = ?';
     const res = await query(sql, [number]);
     if (res.length > 0) {
-      console.log('res: ', res);
-      return 'aaa';
+      // console.log('res: ', res);
+      // number: 2013141223047,
+      //   average_grade: 72.26,
+      //   average_credit: 1.82,
+      //   average_credit_grade: 55.97,
+      //   ranking: 37
+      return `学号:${res[0].number}\n
+        平均成绩:${res[0].average_grade} \n
+        平均学分绩点:${res[0].average_credit} \n
+        加权学分成绩:${res[0].average_credit_grade} \n
+        排名:${res[0].ranking}`;
     }
     return '学号不存在';
   }
