@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="vux-demo">
-      <img class="logo" src="../assets/vux_logo.png">
-      <h1> </h1>
+      <h1>Title</h1>
     </div>
     <group title="cell demo">
       <cell title="Vux" value="Cool" is-link></cell>
@@ -32,6 +31,7 @@ export default {
 
 <style>
 .vux-demo {
+  margin-top: 30%;
   text-align: center;
 }
 .logo {
