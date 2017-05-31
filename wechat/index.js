@@ -29,6 +29,8 @@ app.use(views(path.join(__dirname, './views'), {
   extension: 'ejs',
 }));
 
+// 初始化路由中间件
+app.use(routers.routes()).use(routers.allowedMethods());
 
 app.use(wechat(config.wechat.token).middleware(async (message) => {
   const number = parseInt(message.Content, 10);
@@ -53,9 +55,6 @@ app.use(wechat(config.wechat.token).middleware(async (message) => {
   }
   return '学号格式错误';
 }));
-
-// 初始化路由中间件
-app.use(routers.routes()).use(routers.allowedMethods());
 
 
 // 监听启动端口
