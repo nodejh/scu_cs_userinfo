@@ -20,6 +20,7 @@
 
 <script>
 import { Group, XButton, XInput, Alert } from 'vux'
+// import VueRouter from 'vue-router'
 
 export default {
   components: {
@@ -31,21 +32,37 @@ export default {
 
   methods: {
     login () {
+      const self = this
       const data = {
-        number: this.number,
-        password: this.password
+        number: self.number,
+        password: self.password
       }
       console.log('data: ', data)
-      this.isLoading = true
-      this.alertShow = true
-      console.log('this.$http: ', this.$http)
-      this.$http.post('/api/login', data)
+      self.isLoading = true
+      // console.log('self.$http: ', self.$http)
+      self.$http.post('/api/login', data)
         .then((response) => {
           // success callback
           console.log('success response: ', response)
+          const { data } = response
+          if (!data.success) {
+            self.isLoading = false
+            self.alertShow = true
+            self.alertContent = data.message
+            return false
+          }
+          self.isLoading = false
+          console.log('self.$router: ', self.$router)
+          console.log('self.$router.push: ', self.$router.push)
+          // 跳转到首页
+          self.$router.push('/')
         }, (response) => {
           // error callback
           console.log('error response: ', response.message)
+          self.isLoading = false
+          self.alertShow = true
+          self.alertContent = '绑定教务系统失败，请重试'
+          return false
         })
     }
   },

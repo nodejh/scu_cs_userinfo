@@ -5,13 +5,11 @@ import { AjaxPlugin } from 'vux'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import App from './App'
-import Home from './components/HelloFromVux'
+import Home from './components/Home'
 import Login from './components/Login'
 
 Vue.use(VueRouter)
 Vue.use(AjaxPlugin)
-
-console.log('http: ', Vue.http)
 
 const routes = [{
   path: '/',
