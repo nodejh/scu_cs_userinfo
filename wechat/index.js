@@ -33,6 +33,7 @@ app.use(views(path.join(__dirname, './views'), {
 app.use(routers.routes()).use(routers.allowedMethods());
 
 app.use(wechat(config.wechat.token).middleware(async (message) => {
+  console.log('message: ', message);
   const number = parseInt(message.Content, 10);
   if (number) {
     // 根据 number 查询成绩
