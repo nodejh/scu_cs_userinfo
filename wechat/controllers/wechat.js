@@ -33,6 +33,6 @@ const middleware = async (message) => {
 };
 
 
-module.export = {
+module.exports = {
   middleware,
 };

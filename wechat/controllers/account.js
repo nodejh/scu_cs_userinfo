@@ -12,6 +12,6 @@ const isBind = async (openId) => {
 };
 
 
-module.export = {
+module.exports = {
   isBind,
 };
