@@ -22,4 +22,4 @@ const replyMessage = {
 };
 
 
-module.export = replyMessage;
+module.exports = replyMessage;
