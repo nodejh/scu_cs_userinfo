@@ -1,4 +1,4 @@
-const { query } = require('./../utils/mysql');
+// const { query } = require('./../utils/mysql');
 const constants = require('./../constants/constants');
 const account = require('./account');
 

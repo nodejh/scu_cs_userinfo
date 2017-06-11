@@ -29,7 +29,7 @@ app.use(views(path.join(__dirname, './views'), {
 
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());
-
+console.log('middleware: ', middleware);
 app.use(wechat(config.wechat.token).middleware(middleware));
 
 
