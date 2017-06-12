@@ -4,6 +4,7 @@ const log = require('./../helper/log');
 const config = require('./../config/config');
 
 const website = config.zhjw;
+// console.log('website: ', website);
 
 /**
  * 登录教务系统
@@ -16,7 +17,7 @@ const loginZhjw = (number, password) => {
     zjh: number,
     mm: password,
   });
-  console.log('website: ', website);
+  console.log('111website: ', website);
   const options = {
     host: website.url.hostname,
     method: 'POST',

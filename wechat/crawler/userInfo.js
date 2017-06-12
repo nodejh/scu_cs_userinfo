@@ -6,7 +6,7 @@ const request = require('./../helper/request');
 const zhjwSpecialText = require('./zhjwSpecialText');
 
 const website = config.zhjw;
-
+console.log('website: ', website);
 
 const analyseUserInfo = (html) => {
   // console.log('html: ', html);
