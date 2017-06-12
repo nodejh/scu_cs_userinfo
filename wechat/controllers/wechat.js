@@ -29,7 +29,9 @@ const middleware = async (message) => {
     // 是
     const numberAndPassword = content.split('+');
     const number = parseInt(numberAndPassword[0], 10);
-    const password = parseInt(numberAndPassword[1], 10);
+    const password = numberAndPassword[1];
+    console.log('number: ', number);
+    console.log('password: ', password);
     // 判断格式是否正确
     if (number && password && number.length === 13 && password.length > 4) {
       // 正确
