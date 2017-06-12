@@ -2,13 +2,45 @@
 const constants = require('./../constants/constants');
 const account = require('./account');
 
+const {
+  defalutMessage,
+  bindMessage,
+  primaryKeysWithBind,
+  // primaryKeysWithoutBind,
+} = constants;
+
 const middleware = async (message) => {
   console.log('message: ', message);
   const openId = message.FromUserName;
-  const isBind = await account.isBind(openId);
-  console.log('isBind: ', isBind);
+  const content = message.Content;
 
-  return constants.default;
+  // 判断是否需要绑定教务系统
+  if (primaryKeysWithBind.indexOf(content)) {
+    // 是
+    const isBind = await account.isBind(openId);
+    // 如果没有绑定
+    if (!isBind) {
+      return bindMessage;
+    }
+  }
+
+  // 判断是否是绑定教务系统
+  if (message.indexOf('+') !== -1) {
+    // 是
+    const numberAndPassword = message.split('+');
+    const number = parseInt(numberAndPassword[0], 10);
+    const password = parseInt(numberAndPassword[1], 10);
+    // 判断格式是否正确
+    if (number && password && number.length === 13 && password.length > 4) {
+      // 正确
+      const bindResult = await account.bind(openId, number, password);
+      console.log('bindResult: ', bindResult);
+    }
+  }
+
+  return defalutMessage;
+
+  // if (content) { return constants.defalutMessage; }
   // const number = parseInt(message.Content, 10);
   // if (number) {
   //   // 根据 number 查询成绩
