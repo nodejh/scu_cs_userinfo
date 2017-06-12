@@ -33,7 +33,7 @@ const middleware = async (message) => {
     console.log('number: ', number);
     console.log('password: ', password);
     // 判断格式是否正确
-    if (number && password && number.length === 13 && password.length > 4) {
+    if (number && password && number.toString().length === 13 && password.length > 4) {
       // 正确
       const bindResult = await account.bind(openId, number, password);
       console.log('bindResult: ', bindResult);
