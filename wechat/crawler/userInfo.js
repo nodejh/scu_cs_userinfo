@@ -68,6 +68,7 @@ const analyseUserInfo = (html) => {
  */
 const fetchUserInfo = (cookie) => {
   // console.log('cookie: ', cookie);
+  console.log('website: ', website);
   const postData = '';
   const options = {
     host: website.url.hostname,
