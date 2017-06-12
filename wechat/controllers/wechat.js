@@ -15,7 +15,7 @@ const middleware = async (message) => {
   const content = message.Content;
 
   // 判断是否需要绑定教务系统
-  if (primaryKeysWithBind.indexOf(content)) {
+  if (primaryKeysWithBind.indexOf(content) !== -1) {
     // 是
     const isBind = await account.isBind(openId);
     // 如果没有绑定
