@@ -6,7 +6,6 @@ const request = require('./../helper/request');
 const zhjwSpecialText = require('./zhjwSpecialText');
 
 const website = config.zhjw;
-console.log('website: ', website);
 
 const analyseUserInfo = (html) => {
   // console.log('html: ', html);
@@ -68,7 +67,6 @@ const analyseUserInfo = (html) => {
  */
 const fetchUserInfo = (cookie) => {
   // console.log('cookie: ', cookie);
-  console.log('website: ', website);
   const postData = '';
   const options = {
     host: website.url.hostname,

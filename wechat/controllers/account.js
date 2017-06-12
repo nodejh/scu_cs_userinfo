@@ -30,11 +30,11 @@ const bind = async (openId, number, password) => {
   const res = { success: false, message: '绑定失败，请重试', userInfo: {} };
   try {
     const cookies = await loginZhjw(number, password);
-    console.log('cookies: ', cookies);
-    const info = analyseUserInfo(cookies);
+    const info = await analyseUserInfo(cookies);
     if (info.error) {
       res.message = info.error;
     } else {
+      res.success = true;
       res.message = '绑定成功！';
       res.userInfo = info.userInfo;
     }
