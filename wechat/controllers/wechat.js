@@ -27,7 +27,7 @@ const middleware = async (message) => {
   // 判断是否是绑定教务系统
   if (content.indexOf('+') !== -1) {
     // 是
-    const numberAndPassword = message.split('+');
+    const numberAndPassword = content.split('+');
     const number = parseInt(numberAndPassword[0], 10);
     const password = parseInt(numberAndPassword[1], 10);
     // 判断格式是否正确
