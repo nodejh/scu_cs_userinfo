@@ -100,7 +100,30 @@ const fetchUserInfo = (cookie) => {
 };
 
 
+// const userInfo = async (cookie) => {
+//   try {
+//     const html = await fetchUserInfo(cookie);
+//     const res = analyseUserInfo(html);
+//     return res;
+//   } catch (e) {
+//     return {
+//       error: e.message,
+//     };
+//   }
+// };
+
+const userInfo = cookie => fetchUserInfo(cookie)
+    .then((html) => {
+      const res = analyseUserInfo(html);
+      if (res.error) {
+        return Promise.reject(res.error);
+      }
+      return Promise.resolve(res.userInfo);
+    })
+    .catch(e => Promise.reject(e));
+
 module.exports = {
   analyseUserInfo,
   fetchUserInfo,
+  userInfo,
 };
