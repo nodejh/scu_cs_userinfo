@@ -16,6 +16,9 @@ const log = {
   success(message) {
     console.log(colors.Reset, colors.fg.Green, `[${dateformat(new Date())}]`, message, colors.Reset);
   },
+  debug(message) {
+    console.log(`[${dateformat(new Date())}]`, message);
+  },
   text(message) {
     console.log(`[${dateformat(new Date())}]`, message);
   },
