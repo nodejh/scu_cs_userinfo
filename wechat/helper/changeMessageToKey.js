@@ -15,17 +15,14 @@ const changeMessageTokey = (message) => {
   if (data === '3' || data.indexOf('本学期成绩') !== -1 || data.indexOf('这学期成绩') !== -1) {
     return 'currentTermGrade';
   }
-  if (data === '4') {
-    return '4';
+  if (data === '4' || data.indexOf('成绩') !== -1) {
+    return 'allPassGrades';
   }
   if (data === '5') {
     return '5';
   }
   if (data === 'unbind') {
     return 'unbind';
-  }
-  if (data.length <= 4 && data.indexOf('成绩') !== -1) {
-    return 'grade';
   }
   if (data.length <= 4 && data.indexOf('排名') !== -1) {
     return 'rank';

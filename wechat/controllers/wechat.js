@@ -24,15 +24,14 @@ const handle = {
       const { gpa, gradesList } = res.grades;
       // console.log('gpa: ', gpa);
       let text = '';
-      // 课程总门数 <b><%= grade.length %>
       text += `必修绩点: ${gpa.averageGpaObligatory}\n`;
       text += `所有科目平均绩点: ${gpa.averageGpa}\n`;
       text += `必修成绩: ${gpa.averageGradeObligatory}\n`;
       text += `所有科目平均成绩: ${gpa.averageGrade}\n`;
       text += '\n\n';
+      // 已出成绩
       const getGradeNumber = gradesList.filter(item => !isNaN(parseInt(item.grade, 10))).length;
-      // const getGradeNumber = ;
-      text += `已出成绩/课程总门数: ${getGradeNumber}/${grade.length}`;
+      text += `已出成绩/课程总门数: ${getGradeNumber}/${gradesList.length}\n`;
       gradesList.forEach((item) => {
         if (!isNaN(parseInt(item.grade, 10))) {
           text += `${item.courseName} [${item.courseProperty}]\n`;
@@ -47,7 +46,51 @@ const handle = {
       return e.message;
     }
   },
-  4: isBind => isBind,
+  allPassGrades: async (openId, isBind) => {
+    if (!isBind) {
+      // 没有绑定
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const res = await grade.allPAssGrades(openId);
+      if (!res.success) {
+        return res.message;
+      }
+      // console.log('gpa: ', gpa);
+      // gradeList.averageGpa = caculateResult.averageGpa;
+      // gradeList.averageGrade = caculateResult.averageGrade;
+      // gradeList.averageGpaObligatory = caculateResult.averageGpaObligatory;
+      // gradeList.averageGradeObligatory = caculateResult.averageGradeObligatory;
+      // gradeList.sumCredit = caculateResult.sumCredit;
+      // gradeList.sumCreditObligatory = caculateResult.sumCreditObligatory;
+      // term
+
+      let text = '';
+      res.grades.reverse().forEach((term) => {
+        text += `${term.term}\n`;
+        text += `必修绩点: ${term.averageGpaObligatory}\n`;
+        text += `所有科目平均绩点: ${term.averageGpa}\n`;
+        text += `必修成绩: ${term.averageGradeObligatory}\n`;
+        text += `所有科目平均成绩: ${term.averageGrade}\n`;
+        text += `总学分: ${term.sumCredit}\n`;
+        text += `必修总学分: ${term.sumCreditObligatory}\n`;
+        text += '\n';
+        term.list.forEach((item) => {
+          if (!isNaN(parseInt(item.grade, 10))) {
+            text += `${item.courseName} [${item.courseProperty}]\n`;
+            text += `${item.courseNumber}-${item.lessonNumber}\n`;
+            text += `学分: ${item.credit}\n`;
+            text += `成绩: ${item.grade}\n`;
+            text += '\n';
+          }
+        });
+        text += '\n';
+      });
+      return text;
+    } catch (e) {
+      return e.message;
+    }
+  },
   /**
    * 解绑
    * @param  {String}  openId open id

@@ -20,7 +20,7 @@ const currentTermGrade = async (openId) => {
     // console.log('grades: ', grades);
     res.grades = grades;
     res.success = true;
-    res.message = '获取';
+    res.message = '获取本学期成绩成功';
     // 获取成绩
     return res;
   } catch (e) {
@@ -30,7 +30,7 @@ const currentTermGrade = async (openId) => {
 };
 
 
-const allPAssGrades = async (openId) => {
+const allPassGrades = async (openId) => {
   const res = { success: false, message: '获取所有学期成绩失败', grades: {} };
   try {
     const sqlSelect = 'select * from users where open_id = ?';
@@ -42,9 +42,10 @@ const allPAssGrades = async (openId) => {
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const grades = await getAllPassGrades(cookies);
-    console.log('grades: ', grades);
-    // gradesList, gpa
+    // console.log('grades: ', grades);
     res.grades = grades;
+    res.success = true;
+    res.message = '获取所有学期成绩成功';
     // 获取成绩
     return res;
   } catch (e) {
@@ -56,5 +57,5 @@ const allPAssGrades = async (openId) => {
 
 module.exports = {
   currentTermGrade,
-  allPAssGrades,
+  allPassGrades,
 };
