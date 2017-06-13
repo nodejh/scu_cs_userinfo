@@ -21,6 +21,9 @@ const changeMessageTokey = (message) => {
   if (data === '5') {
     return '5';
   }
+  if (data === 'unbind') {
+    return 'unbind';
+  }
   if (data.length <= 4 && data.indexOf('成绩') !== -1) {
     return 'grade';
   }
