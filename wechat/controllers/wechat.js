@@ -90,6 +90,7 @@ const handle = {
       // 没有绑定
       return constants.WECHAT_NOT_BIND;
     }
+    console.log('xxxx');
     try {
       const text = '';
       const res = await examination.getExamination(openId);
