@@ -18,9 +18,22 @@ const handle = {
     }
     try {
       const grades = await grade.currentTermGrade(openId);
-      const text = '';
-      // text += grades.gpa
-      // console.log('currentTermGrade: ', currentTermGrade);
+      const { gpa, gradesList } = grades;
+      let text = '';
+      text += `必修绩点: ${gpa.averageGpaObligatory}\n`;
+      text += `所有科目平均绩点: ${gpa.averageGpa}\n`;
+      text += `必修成绩: ${gpa.averageGradeObligatory}\n`;
+      text += `所有科目平均成绩: ${gpa.averageGrade}\n`;
+      text += '\n\n';
+      gradesList.forEach((item) => {
+        if (!isNaN(parseInt(item.grade, 10))) {
+          text += `${item.courseName} [${item.courseProperty}]\n`;
+          text += `${item.courseNumber}-${item.lessonNumber}\n`;
+          text += `学分: ${item.credit}\n`;
+          text += `成绩: ${item.grade}\n`;
+          text += '\n';
+        }
+      });
       return text;
     } catch (e) {
       return e.message;
