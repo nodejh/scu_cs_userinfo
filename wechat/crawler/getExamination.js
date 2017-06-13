@@ -113,4 +113,6 @@ const fetchExamination = (cookie) => {
 };
 
 
-module.exports = fetchExamination;
+module.exports = {
+  fetchExamination,
+};
