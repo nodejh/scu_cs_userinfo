@@ -77,31 +77,28 @@ const analyseExamination = (html) => {
  */
 const fetchExamination = (cookie) => {
   log.debug('cookie: ', cookie);
-  return new Promise((resolve, reject) => {
-    const options = {
-      url: website.url.examination,
-      encoding: null,
-      headers: {
-        Cookie: cookie,
-        'User-Agent': config.crawler['User-Agent'],
-      },
-    };
-    request(options, (error, response, body) => {
-      if (error) {
-        log.error('获取考表失败: ', error);
-        return reject(error);
+  const postData = '';
+  const options = {
+    url: website.url.examination,
+    encoding: null,
+    headers: {
+      Cookie: cookie,
+      'User-Agent': config.crawler['User-Agent'],
+    },
+  };
+  return request(postData, options)
+    .then((result) => {
+      const data = analyseExamination(result.body);
+      if (data.error) {
+        return Promise.reject(new Error(data.error));
       }
-      log.debug('response.statusCode: ', response.statusCode);
-      if (response.statusCode !== 200) {
-        return reject(error);
-      }
-      const content = iconv.decode(body, 'GBK');
-      // log.debug('content: ', content);
-      const examination = analyseExamination(content);
-      console.log('examination: ', examination);
-      return resolve(examination);
+      return Promise.resolve(data.examination);
+    })
+    .catch((exception) => {
+      log.error('获取考表失败');
+      log.error(exception);
+      return Promise.reject(exception);
     });
-  });
 };
 
 
