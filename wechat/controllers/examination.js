@@ -16,10 +16,10 @@ const getExamination = async (openId) => {
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const examination = await fetchExamination(cookies);
-    console.log('dexamination: ', examination);
+    // console.log('dexamination: ', examination);
     res.examination = examination;
     res.success = true;
-    res.message = '获取考试安排失败成功';
+    res.message = '获取考试安排成功';
     return res;
   } catch (e) {
     res.message = e.message;
