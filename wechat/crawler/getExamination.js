@@ -79,12 +79,14 @@ const fetchExamination = (cookie) => {
   log.debug('cookie: ', cookie);
   const postData = '';
   const options = {
-    url: website.url.examination,
     encoding: null,
     headers: {
       Cookie: cookie,
       'User-Agent': config.crawler['User-Agent'],
     },
+    host: website.url.hostname,
+    method: 'GET',
+    path: website.url.userInfo,
   };
   return request(postData, options)
     .then((result) => {
