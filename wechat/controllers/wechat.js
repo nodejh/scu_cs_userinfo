@@ -22,13 +22,17 @@ const handle = {
         return res.message;
       }
       const { gpa, gradesList } = res.grades;
-      console.log('gpa: ', gpa);
+      // console.log('gpa: ', gpa);
       let text = '';
+      // 课程总门数 <b><%= grade.length %>
       text += `必修绩点: ${gpa.averageGpaObligatory}\n`;
       text += `所有科目平均绩点: ${gpa.averageGpa}\n`;
       text += `必修成绩: ${gpa.averageGradeObligatory}\n`;
       text += `所有科目平均成绩: ${gpa.averageGrade}\n`;
       text += '\n\n';
+      const getGradeNumber = gradesList.filter(item => !isNaN(parseInt(item.grade, 10))).length;
+      // const getGradeNumber = ;
+      text += `已出成绩/课程总门数: ${getGradeNumber}/${grade.length}`;
       gradesList.forEach((item) => {
         if (!isNaN(parseInt(item.grade, 10))) {
           text += `${item.courseName} [${item.courseProperty}]\n`;
