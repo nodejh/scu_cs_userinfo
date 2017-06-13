@@ -57,17 +57,8 @@ const handle = {
       if (!res.success) {
         return res.message;
       }
-      // console.log('gpa: ', gpa);
-      // gradeList.averageGpa = caculateResult.averageGpa;
-      // gradeList.averageGrade = caculateResult.averageGrade;
-      // gradeList.averageGpaObligatory = caculateResult.averageGpaObligatory;
-      // gradeList.averageGradeObligatory = caculateResult.averageGradeObligatory;
-      // gradeList.sumCredit = caculateResult.sumCredit;
-      // gradeList.sumCreditObligatory = caculateResult.sumCreditObligatory;
-      // term
-
       let text = '';
-      res.grades.reverse().forEach((term) => {
+      res.grades.forEach((term) => {
         text += `${term.term}\n`;
         text += `必修绩点: ${term.averageGpaObligatory}\n`;
         text += `所有科目平均绩点: ${term.averageGpa}\n`;
