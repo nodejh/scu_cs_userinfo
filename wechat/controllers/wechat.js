@@ -33,7 +33,7 @@ const middleware = async (message) => {
 
   // 判断是否已经绑定
   const isBind = await account.isBind(openId);
-  const key = changeMessageTokey(message);
+  const key = changeMessageTokey(content);
   console.log('Object.keys(handle).indexOf(key): ', Object.keys(handle).indexOf(key));
   console.log('Object.keys(handle): ', Object.keys(handle));
   console.log('key: ', key);
