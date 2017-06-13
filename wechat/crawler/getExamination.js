@@ -10,7 +10,7 @@ const cheerio = require('cheerio');
 const website = config.zhjw;
 
 
-const analyseUserInfo = (html) => {
+const analyseExamination = (html) => {
   // log.debug('html: ', html);
   const errSpecialText = zhjwSpecialText(html);
   log.debug('errSpecialText: ', errSpecialText);
@@ -97,7 +97,7 @@ const fetchExamination = (cookie) => {
       }
       const content = iconv.decode(body, 'GBK');
       // log.debug('content: ', content);
-      const examination = analyseUserInfo(content);
+      const examination = analyseExamination(content);
       console.log('examination: ', examination);
       return resolve(examination);
     });
