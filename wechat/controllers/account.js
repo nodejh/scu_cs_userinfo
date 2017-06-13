@@ -1,7 +1,7 @@
 
 const query = require('./../utils/mysql').query;
 const loginZhjw = require('./../crawler/loginZhjw');
-const { userInfo } = require('./../crawler/userInfo');
+const { fetchUserInfo } = require('./../crawler/userInfo');
 
 
 /**
@@ -30,14 +30,7 @@ const bind = async (openId, number, password) => {
   const res = { success: false, message: '绑定失败，请重试', userInfo: {} };
   try {
     const cookies = await loginZhjw(number, password);
-    const info = await userInfo(cookies);
-    // if (info.error) {
-    //   res.message = info.error;
-    // } else {
-    //   res.success = true;
-    //   res.message = '绑定成功！';
-    //   res.userInfo = info.userInfo;
-    // }
+    const info = await fetchUserInfo(cookies);
     console.log('info: ', info);
     res.success = true;
     res.message = '绑定成功！';
