@@ -97,12 +97,13 @@ const handle = {
         return res.message;
       }
       res.examination.forEach((item) => {
-        text += `时间: ${item.date} ${item.time} (星期`;
+        text += `时间: ${item.date} ${item.time}\n`;
         text += `课程: ${item.class}\n`;
         text += `地点: ${item.campus} ${item.teachingBuilding}\n`;
         text += `教室: ${item.classroom}\n`;
         text += `座位号: ${item.seatNumber}\n`;
         text += `第${item.weekNumber}周 ${item.week})\n`;
+        text += '\n';
       });
       return text;
     } catch (e) {
