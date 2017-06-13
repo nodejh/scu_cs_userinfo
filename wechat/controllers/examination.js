@@ -5,7 +5,7 @@ const loginZhjw = require('./../crawler/loginZhjw');
 
 
 const getExamination = async (openId) => {
-  const res = { success: false, message: '获取本学期成绩失败', grades: {} };
+  const res = { success: false, message: '获取考试安排失败', examination: [] };
   try {
     const sqlSelect = 'select * from users where open_id = ?';
     const users = await query(sqlSelect, [openId]);
@@ -19,8 +19,7 @@ const getExamination = async (openId) => {
     console.log('dexamination: ', examination);
     res.examination = examination;
     res.success = true;
-    res.message = '获取本学期成绩成功';
-    // 获取成绩
+    res.message = '获取考试安排失败成功';
     return res;
   } catch (e) {
     res.message = e.message;

@@ -21,7 +21,6 @@ const currentTermGrade = async (openId) => {
     res.grades = grades;
     res.success = true;
     res.message = '获取本学期成绩成功';
-    // 获取成绩
     return res;
   } catch (e) {
     res.message = e.message;
@@ -46,7 +45,6 @@ const allPassGrades = async (openId) => {
     res.grades = grades;
     res.success = true;
     res.message = '获取所有学期成绩成功';
-    // 获取成绩
     return res;
   } catch (e) {
     res.message = e.message;
