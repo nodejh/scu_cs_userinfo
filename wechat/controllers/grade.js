@@ -15,7 +15,7 @@ const currentTermGrade = async (openId) => {
       throw new Error(constants.WECHAT_NOT_BIND);
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
-    const grades = getCurrentTermGrade(cookies);
+    const grades = await getCurrentTermGrade(cookies);
     console.log('grades: ', grades);
     res.grades = grades;
     // 获取成绩
