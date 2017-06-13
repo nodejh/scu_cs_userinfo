@@ -17,8 +17,12 @@ const handle = {
       return constants.WECHAT_NOT_BIND;
     }
     try {
-      const grades = await grade.currentTermGrade(openId);
-      const { gpa, gradesList } = grades;
+      const res = await grade.currentTermGrade(openId);
+      if (!res.success) {
+        return res.message;
+      }
+      const { gpa, gradesList } = res.grades;
+      console.log('gpa: ', gpa);
       let text = '';
       text += `必修绩点: ${gpa.averageGpaObligatory}\n`;
       text += `所有科目平均绩点: ${gpa.averageGpa}\n`;

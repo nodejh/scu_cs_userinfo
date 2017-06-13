@@ -12,12 +12,15 @@ const currentTermGrade = async (openId) => {
     const users = await query(sqlSelect, [openId]);
     if (users.length === 0) {
       // 没有对应的用户信息 => 用户未绑定教务系统
-      throw new Error(constants.WECHAT_NOT_BIND);
+      res.message = constants.WECHAT_NOT_BIND;
+      return res;
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const grades = await getCurrentTermGrade(cookies);
-    console.log('grades: ', grades);
+    // console.log('grades: ', grades);
     res.grades = grades;
+    res.success = true;
+    res.message = '获取';
     // 获取成绩
     return res;
   } catch (e) {
@@ -34,10 +37,11 @@ const allPAssGrades = async (openId) => {
     const users = await query(sqlSelect, [openId]);
     if (users.length === 0) {
       // 没有对应的用户信息 => 用户未绑定教务系统
-      throw new Error(constants.WECHAT_NOT_BIND);
+      res.message = constants.WECHAT_NOT_BIND;
+      return res;
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
-    const grades = getAllPassGrades(cookies);
+    const grades = await getAllPassGrades(cookies);
     console.log('grades: ', grades);
     // gradesList, gpa
     res.grades = grades;
