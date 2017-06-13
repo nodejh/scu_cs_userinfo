@@ -13,7 +13,7 @@ const calculateGpa = require('./../helper/calculateGpa').calculateGpa;
 const getAllPassGrades = (cookie) => {
   const postData = '';
   const options = {
-    host: config.hostname,
+    host: config.zhjw.url.hostname,
     method: 'GET',
     path: config.zhjw.url.allPassGrades,
     headers: {

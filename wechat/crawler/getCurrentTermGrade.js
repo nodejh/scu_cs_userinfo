@@ -12,7 +12,7 @@ const config = require('./../config/config');
 const getCurrentTermGrade = (cookie) => {
   const postData = '';
   const options = {
-    host: config.hostname,
+    host: config.zhjw.url.hostname,
     method: 'GET',
     path: config.zhjw.url.currentTermGrade,
     headers: {
