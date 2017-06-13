@@ -54,4 +54,5 @@ app.use(wechat(config.wechat.token).middleware(middleware));
 
 // 监听启动端口
 app.listen(config.port);
+// eslint-disable-next-line
 console.log(`the server is start at port ${config.port}`);

@@ -2,13 +2,6 @@ const constants = require('./../config/constants');
 const account = require('./account');
 const changeMessageTokey = require('./../helper/changeMessageToKey');
 
-const {
-  defalutMessage,
-  bindMessage,
-  primaryKeysWithBind,
-  // primaryKeysWithoutBind,
-} = constants;
-
 
 const handle = {
   1: (isBind) => {
@@ -21,7 +14,34 @@ const handle = {
   grade: () => {
 
   },
-  unbind: isBind => isBind,
+  /**
+   * 解绑
+   * @param  {String}  openId open id
+   * @param  {Boolean} isBind is bind or not
+   * @return {Promise}        reply message
+   */
+  unbind: async (openId, isBind) => {
+    if (!isBind) {
+      // 没有绑定
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const res = await account.unbind(openId);
+      if (res.success) {
+        return '解绑成功！';
+      }
+      return res.message;
+    } catch (e) {
+      return e.message;
+    }
+  },
+  /**
+   * 绑定教务系统
+   * @param  {String}  openId  open id
+   * @param  {Boolean} isBind  is bind or not
+   * @param  {String}  content user message
+   * @return {Promise}         reply message
+   */
   bind: async (openId, isBind, content) => {
     if (isBind) {
       // 已经绑定过

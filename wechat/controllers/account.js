@@ -20,6 +20,29 @@ const isBind = async (openId) => {
 
 
 /**
+ * 解绑教务系统
+ * @param  {string}  openId   微信 open id
+ * @return {Promise}          {success, message}
+ */
+const unbind = async (openId) => {
+  const res = { success: false, message: '解绑失败，请重试' };
+  try {
+    const sqlSelect = 'select * from users where open_id = ?';
+    const users = await query(sqlSelect, [openId]);
+    const sqlBackup = 'insert into users_backup set ?';
+    await query(sqlBackup, [users[0]]);
+    const sqlDelete = 'delete from users where openid = ?';
+    await query(sqlDelete, [openId]);
+    res.success = true;
+    res.message = '解绑成功！';
+    return res;
+  } catch (e) {
+    res.message = e.message;
+    return res;
+  }
+};
+
+/**
  * 绑定教务系统
  * @param  {string}  openId   微信 open id
  * @param  {string}  number   学号
@@ -57,5 +80,6 @@ const bind = async (openId, number, password) => {
 
 module.exports = {
   isBind,
+  unbind,
   bind,
 };
