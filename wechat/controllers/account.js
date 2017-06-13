@@ -28,7 +28,9 @@ const unbind = async (openId) => {
   const res = { success: false, message: '解绑失败，请重试' };
   try {
     const sqlSelect = 'select * from users where open_id = ?';
+    console.log('openId: ', openId);
     const users = await query(sqlSelect, [openId]);
+    console.log('users: ', users);
     const sqlBackup = 'insert into users_backup set ?';
     await query(sqlBackup, [users[0]]);
     const sqlDelete = 'delete from users where openid = ?';

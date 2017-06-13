@@ -70,6 +70,7 @@ const handle = {
 };
 
 const middleware = async (message) => {
+  // eslint-disable-next-line
   console.log('message: ', message);
   const openId = message.FromUserName;
   const content = message.Content;
@@ -78,7 +79,7 @@ const middleware = async (message) => {
   const isBind = await account.isBind(openId);
   const key = changeMessageTokey(content);
   if (Object.keys(handle).indexOf(key) !== -1) {
-    return handle[key](isBind, content);
+    return handle[key](openId, isBind, content);
   }
   return constants.WECHAT_DEFAULT;
 };
