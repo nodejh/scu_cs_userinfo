@@ -27,6 +27,15 @@ app.use(views(path.join(__dirname, './views'), {
   extension: 'ejs',
 }));
 
+// test
+// const a = async () => {
+//   // eslint-disable-next-line
+//   const account = require('./controllers/account.js');
+//   const bindResult = await account.bind('x', 2013141223047, 273915);
+//   console.log('bindResult: ', bindResult);
+// };
+// a();
+
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());
 app.use(wechat(config.wechat.token).middleware(middleware));
