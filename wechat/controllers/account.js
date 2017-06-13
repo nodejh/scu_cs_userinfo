@@ -43,10 +43,7 @@ const bind = async (openId, number, password) => {
       grade: info.grade,
       status: 0,
     };
-    console.log('info: ', info);
-
-    const insertRes = await query(sql, [data]);
-    console.log('insertRes: ', insertRes);
+    await query(sql, [data]);
     res.success = true;
     res.message = '绑定成功！';
     res.userInfo = info;

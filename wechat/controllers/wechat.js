@@ -1,6 +1,6 @@
-// const { query } = require('./../utils/mysql');
-const constants = require('./../constants/constants');
+const constants = require('./../config/constants');
 const account = require('./account');
+const changeMessageTokey = require('./../helper/changeMessageToKey');
 
 const {
   defalutMessage,
@@ -9,15 +9,40 @@ const {
   // primaryKeysWithoutBind,
 } = constants;
 
+
+const handle = {
+  1: (isBind) => {
+    console.log('isBind: ', isBind);
+    return isBind;
+  },
+  2: () => 2,
+  3: () => 3,
+  4: () => 4,
+  grade: () => {
+
+  },
+  bind: (isBind) => {
+    console.log('isBind: ', isBind);
+  },
+};
+
 const middleware = async (message) => {
   console.log('message: ', message);
   const openId = message.FromUserName;
   const content = message.Content;
 
+  // 判断是否已经绑定
+  const isBind = await account.isBind(openId);
+  const key = changeMessageTokey(message);
+  if (Object.keys(handle).indexOf(key) !== -1) {
+    return handle[key](isBind);
+  }
+  return constants.WECHAT_DEFAULT;
+
   // 判断是否需要绑定教务系统
   if (primaryKeysWithBind.indexOf(content) !== -1) {
     // 是
-    const isBind = await account.isBind(openId);
+    // const isBind = await account.isBind(openId);
     // 如果没有绑定
     if (!isBind) {
       return bindMessage;
@@ -27,6 +52,14 @@ const middleware = async (message) => {
   // 判断是否是绑定教务系统
   if (content.indexOf('+') !== -1) {
     // 是
+
+    // 判断是否已经绑定
+    if (isBind) {
+
+    } else {
+
+    }
+
     const numberAndPassword = content.split('+');
     const number = parseInt(numberAndPassword[0], 10);
     const password = numberAndPassword[1];
