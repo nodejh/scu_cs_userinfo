@@ -1,5 +1,4 @@
 // 考表
-const iconv = require('iconv-lite');
 const config = require('./../config/config');
 const request = require('./../helper/request');
 const log = require('./../helper/log');

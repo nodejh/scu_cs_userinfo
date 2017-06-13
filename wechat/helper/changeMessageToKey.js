@@ -12,11 +12,11 @@ const changeMessageTokey = (message) => {
   if (data === '2') {
     return '2';
   }
-  if (data === '3' || data.indexOf('本学期成绩') !== -1 || data.indexOf('这学期成绩') !== -1) {
-    return 'currentTermGrade';
-  }
-  if (data === '4' || data.indexOf('成绩') !== -1) {
+  if (data === '4' || data.indexOf('所有成绩') !== -1) {
     return 'allPassGrades';
+  }
+  if (data === '3' || data.indexOf('本学期成绩') !== -1 || data.indexOf('这学期成绩') !== -1 || data.indexOf('成绩') !== -1) {
+    return 'currentTermGrade';
   }
   if (data === '5' || data.indexOf('考表') !== -1 || data.indexOf('考试') !== -1) {
     return 'examination';
