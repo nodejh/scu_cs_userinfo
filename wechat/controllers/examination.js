@@ -16,7 +16,7 @@ const getExamination = async (openId) => {
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const examination = await fetchExamination(cookies);
-    console.log('examination: ', examination);
+    console.log('dexamination: ', examination);
     res.examination = examination;
     res.success = true;
     res.message = '获取本学期成绩成功';

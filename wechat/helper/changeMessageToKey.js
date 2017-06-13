@@ -18,8 +18,8 @@ const changeMessageTokey = (message) => {
   if (data === '4' || data.indexOf('成绩') !== -1) {
     return 'allPassGrades';
   }
-  if (data === '5') {
-    return '5';
+  if (data === '5' || data.indexOf('考表') !== -1) {
+    return 'examination';
   }
   if (data === 'unbind') {
     return 'unbind';

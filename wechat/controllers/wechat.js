@@ -2,7 +2,7 @@ const constants = require('./../config/constants');
 const account = require('./account');
 const grade = require('./grade');
 const changeMessageTokey = require('./../helper/changeMessageToKey');
-
+const examination = require('./examination');
 
 const handle = {
   1: (isBind) => {
@@ -81,6 +81,20 @@ const handle = {
       // eslint-disable-next-line
       console.log('text: ', text);
       return '消息过长，无法显示 T_T';
+    } catch (e) {
+      return e.message;
+    }
+  },
+  examination: async (openId, isBind) => {
+    if (!isBind) {
+      // 没有绑定
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const text = '';
+      const res = await examination.getExamination(openId);
+      console.log('res: ', res);
+      return text;
     } catch (e) {
       return e.message;
     }
