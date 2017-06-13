@@ -2,7 +2,7 @@
 const query = require('./../utils/mysql').query;
 const loginZhjw = require('./../crawler/loginZhjw');
 const { fetchUserInfo } = require('./../crawler/userInfo');
-
+const constants = require('./../config/constants');
 
 /**
  * 判断是否已经绑定教务系统
@@ -10,8 +10,8 @@ const { fetchUserInfo } = require('./../crawler/userInfo');
  * @return {Promise}        true|false
  */
 const isBind = async (openId) => {
-  const sql = 'select id from users where open_id = ?';
-  const res = await query(sql, [openId]);
+  const sql = 'select id from users where open_id = ? and status = ?';
+  const res = await query(sql, [openId, constants.USERS_STATUS_OK]);
   if (res.length === 0) {
     return false;
   }
@@ -31,7 +31,22 @@ const bind = async (openId, number, password) => {
   try {
     const cookies = await loginZhjw(number, password);
     const info = await fetchUserInfo(cookies);
+    const sql = 'insert into users set ?';
+    const data = {
+      open_id: openId,
+      name: info.name,
+      number,
+      password,
+      gender: info.gender,
+      college: info.college,
+      major: info.major,
+      grade: info.grade,
+      status: 0,
+    };
     console.log('info: ', info);
+
+    const insertRes = await query(sql, [data]);
+    console.log('insertRes: ', insertRes);
     res.success = true;
     res.message = '绑定成功！';
     res.userInfo = info;

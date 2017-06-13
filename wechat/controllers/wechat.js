@@ -30,22 +30,22 @@ const middleware = async (message) => {
     const numberAndPassword = content.split('+');
     const number = parseInt(numberAndPassword[0], 10);
     const password = numberAndPassword[1];
-    console.log('number: ', number);
-    console.log('password: ', password);
+    // console.log('number: ', number);
+    // console.log('password: ', password);
     // 判断格式是否正确
     if (number && password && number.toString().length === 13 && password.length > 4) {
       // 正确
       const bindResult = await account.bind(openId, number, password);
-      console.log('bindResult: ', bindResult);
+      // console.log('bindResult: ', bindResult);
       if (bindResult.success) {
         // 绑定成功，返回绑定成功 + 个人信息
-        return `绑定成功！你的个人信息如下
-          姓名: ${bindResult.userInfo.name}
-          性别: ${bindResult.userInfo.gender}
-          年级: ${bindResult.userInfo.grade}
-          学院: ${bindResult.userInfo.college}
-          专业: ${bindResult.userInfo.major}
-          `;
+        return '绑定成功！\n' +
+          '您的个人信息如下\n' +
+          `姓名: ${bindResult.userInfo.name}\n` +
+          `性别: ${bindResult.userInfo.gender}\n` +
+          `年级: ${bindResult.userInfo.grade}\n` +
+          `学院: ${bindResult.userInfo.college}\n` +
+          `专业: ${bindResult.userInfo.major}`;
       }
         // 绑定失败，返回错误消息
       return bindResult.message;
