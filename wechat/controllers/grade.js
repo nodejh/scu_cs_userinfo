@@ -42,7 +42,7 @@ const allPassGrades = async (openId) => {
     }
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const grades = await getAllPassGrades(cookies);
-    console.log('grades: ', grades);
+    // console.log('grades: ', grades);
     res.grades = grades;
     res.success = true;
     res.message = '获取所有学期成绩成功';

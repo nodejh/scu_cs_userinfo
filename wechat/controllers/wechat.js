@@ -78,6 +78,7 @@ const handle = {
         });
         text += '\n';
       });
+      console.log('text: ', text);
       return text;
     } catch (e) {
       return e.message;
