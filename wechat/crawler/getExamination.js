@@ -89,25 +89,17 @@ const fetchExamination = (cookie) => {
     request(options, (error, response, body) => {
       if (error) {
         log.error('获取考表失败: ', error);
-        reject({
-          code: 1047,
-          error: '获取考表失败',
-          detail: error,
-        });
+        return reject(error);
       }
       log.debug('response.statusCode: ', response.statusCode);
       if (response.statusCode !== 200) {
-        reject({
-          code: 1048,
-          error: '获取考表失败',
-          detail: response,
-        });
+        return reject(error);
       }
       const content = iconv.decode(body, 'GBK');
       // log.debug('content: ', content);
       const examination = analyseUserInfo(content);
       console.log('examination: ', examination);
-      resolve(examination);
+      return resolve(examination);
     });
   });
 };
