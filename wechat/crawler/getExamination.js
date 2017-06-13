@@ -13,7 +13,7 @@ const website = config.zhjw;
 const analyseExamination = (html) => {
   // log.debug('html: ', html);
   const errSpecialText = zhjwSpecialText(html);
-  log.debug('errSpecialText: ', errSpecialText);
+  // log.debug('errSpecialText: ', errSpecialText);
   if (errSpecialText) {
     return {
       error: errSpecialText,
@@ -25,10 +25,10 @@ const analyseExamination = (html) => {
     lowerCaseTags: false,
   });
   const userInfoTable = $('body').find('#user').eq(1).find('tr');
-  log.debug('userInfoTable.length: ', userInfoTable.length);
+  // log.debug('userInfoTable.length: ', userInfoTable.length);
   const examination = [];
   userInfoTable.each((index, item) => {
-    log.debug('index, item', index);
+    // log.debug('index, item', index);
     if (index > 0) {
       const examinationItem = {
         campus: $(item).find('td').eq(1)
@@ -60,7 +60,7 @@ const analyseExamination = (html) => {
             .replace(/\s+/g, ''), // 座位号
       };
       examination.push(examinationItem);
-      log.debug('examinationItem', examinationItem);
+      // log.debug('examinationItem', examinationItem);
     }
   });
   log.debug('fetch: ', { examination });

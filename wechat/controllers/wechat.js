@@ -102,7 +102,7 @@ const handle = {
         text += `${item.campus} ${item.teachingBuilding}\n`;
         text += `教室: ${item.classroom}\n`;
         text += `座位号: ${item.seatNumber}\n`;
-        text += `第${item.weekNumber}周 星期${item.week})\n`;
+        text += `第${item.weekNumber}周 星期${item.week}\n`;
         text += '\n';
       });
       return text;
