@@ -90,6 +90,7 @@ const fetchExamination = (cookie) => {
   };
   return request(postData, options)
     .then((result) => {
+      console.log('result: ', result);
       const data = analyseExamination(result.body);
       if (data.error) {
         return Promise.reject(new Error(data.error));
