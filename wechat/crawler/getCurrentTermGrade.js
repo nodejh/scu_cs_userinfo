@@ -62,7 +62,7 @@ const getCurrentTermGrade = (cookie) => {
           }
         });
         log.info('gradesList: ', gradesList);
-        const gpa = calculateGpa.calculateGpa(gradesList);
+        const gpa = calculateGpa(gradesList);
         return Promise.resolve({ gradesList, gpa });
       }
       return Promise.reject(new Error('身份信息失效，请重新登录后再查看成绩'));
