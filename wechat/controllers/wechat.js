@@ -1,5 +1,6 @@
 const constants = require('./../config/constants');
 const account = require('./account');
+const grade = require('./grade');
 const changeMessageTokey = require('./../helper/changeMessageToKey');
 
 
@@ -9,11 +10,21 @@ const handle = {
     return isBind;
   },
   2: isBind => isBind,
-  3: isBind => isBind,
-  4: isBind => isBind,
-  grade: () => {
-
+  // 本学期成绩查询
+  3: async (openId, isBind) => {
+    if (!isBind) {
+      // 没有绑定
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const currentTermGrade = await grade.currentTermGrade(openId);
+      console.log('currentTermGrade: ', currentTermGrade);
+      return currentTermGrade;
+    } catch (e) {
+      return e.message;
+    }
   },
+  4: isBind => isBind,
   /**
    * 解绑
    * @param  {String}  openId open id
