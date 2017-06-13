@@ -12,8 +12,8 @@ const changeMessageTokey = (message) => {
   if (data === '2') {
     return '2';
   }
-  if (data === '3') {
-    return '3';
+  if (data === '3' || data.indexOf('本学期成绩') !== -1 || data.indexOf('这学期成绩') !== -1) {
+    return 'currentTermGrade';
   }
   if (data === '4') {
     return '4';

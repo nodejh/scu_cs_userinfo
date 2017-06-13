@@ -11,7 +11,7 @@ const handle = {
   },
   2: isBind => isBind,
   // 本学期成绩查询
-  3: async (openId, isBind) => {
+  currentTermGrade: async (openId, isBind) => {
     if (!isBind) {
       // 没有绑定
       return constants.WECHAT_NOT_BIND;
