@@ -33,7 +33,7 @@ const unbind = async (openId) => {
     console.log('users: ', users);
     const sqlBackup = 'insert into users_backup set ?';
     await query(sqlBackup, [users[0]]);
-    const sqlDelete = 'delete from users where openid = ?';
+    const sqlDelete = 'delete from users where open_id = ?';
     await query(sqlDelete, [openId]);
     res.success = true;
     res.message = '解绑成功！';
