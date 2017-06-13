@@ -22,22 +22,25 @@ const handle = {
 
   },
   unbind: isBind => isBind,
-  bind: async (isBind) => {
+  bind: async (openId, isBind, content) => {
     if (isBind) {
       // 已经绑定过
       return constants.WECHAT_IS_BIND;
     }
     try {
+      const numberAndPassword = content.split('+');
+      const number = numberAndPassword[0];
+      const password = numberAndPassword[1];
       const res = await account.bind(openId, number, password);
       if (res.success) {
         // 绑定成功，返回绑定成功 + 个人信息
         return '绑定成功！\n' +
           '您的个人信息如下\n' +
-          `姓名: ${bindResult.userInfo.name}\n` +
-          `性别: ${bindResult.userInfo.gender}\n` +
-          `年级: ${bindResult.userInfo.grade}\n` +
-          `学院: ${bindResult.userInfo.college}\n` +
-          `专业: ${bindResult.userInfo.major}`;
+          `姓名: ${res.userInfo.name}\n` +
+          `性别: ${res.userInfo.gender}\n` +
+          `年级: ${res.userInfo.grade}\n` +
+          `学院: ${res.userInfo.college}\n` +
+          `专业: ${res.userInfo.major}`;
       }
       return res.message;
     } catch (e) {
@@ -55,7 +58,7 @@ const middleware = async (message) => {
   const isBind = await account.isBind(openId);
   const key = changeMessageTokey(content);
   if (Object.keys(handle).indexOf(key) !== -1) {
-    return handle[key](isBind);
+    return handle[key](isBind, content);
   }
   return constants.WECHAT_DEFAULT;
 };
