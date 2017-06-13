@@ -2,12 +2,13 @@ const cheerio = require('cheerio');
 const request = require('./../helper/request');
 const log = require('./../helper/log');
 const config = require('./../config/config');
+const calculateGpa = require('./../helper/calculateGpa').calculateGpa;
 
 
 /**
  * 获取本学期成绩
  * @param {string} cookie cookie
- * @returns {Promise} 查询正确时返回成绩列表
+ * @returns {Promise} 查询正确时返回成绩列表 { gradesList, gpa }
  */
 const getCurrentTermGrade = (cookie) => {
   const postData = '';
@@ -31,11 +32,11 @@ const getCurrentTermGrade = (cookie) => {
           lowerCaseTags: false,
         });
         const $list = $('body').find('table[id="user"]').find('tr');
-        const grade = [];
+        const gradesList = [];
         // eslint-disable-line
         $list.each(function item(index) {
           if (index > 0 && index < $list.length - 1) {
-            grade.push({
+            gradesList.push({
               // 课程号
               courseNumber: $(this).find('td').eq(0).text()
                 .replace(/\s+/g, ''),
@@ -60,8 +61,9 @@ const getCurrentTermGrade = (cookie) => {
             });
           }
         });
-        log.info('grade: ', grade);
-        return Promise.resolve(grade);
+        log.info('gradesList: ', gradesList);
+        const gpa = calculateGpa.calculateGpa(gradesList);
+        return Promise.resolve({ gradesList, gpa });
       }
       return Promise.reject(new Error('身份信息失效，请重新登录后再查看成绩'));
     })

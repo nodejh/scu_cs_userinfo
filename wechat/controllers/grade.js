@@ -39,6 +39,7 @@ const allPAssGrades = async (openId) => {
     const cookies = await loginZhjw(users[0].number, users[0].password);
     const grades = getAllPassGrades(cookies);
     console.log('grades: ', grades);
+    // gradesList, gpa
     res.grades = grades;
     // 获取成绩
     return res;

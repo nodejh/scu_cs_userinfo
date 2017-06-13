@@ -17,9 +17,11 @@ const handle = {
       return constants.WECHAT_NOT_BIND;
     }
     try {
-      const currentTermGrade = await grade.currentTermGrade(openId);
-      console.log('currentTermGrade: ', currentTermGrade);
-      return currentTermGrade;
+      const grades = await grade.currentTermGrade(openId);
+      const text = '';
+      // text += grades.gpa
+      // console.log('currentTermGrade: ', currentTermGrade);
+      return text;
     } catch (e) {
       return e.message;
     }
