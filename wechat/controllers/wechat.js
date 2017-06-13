@@ -52,7 +52,7 @@ const handle = {
       return constants.WECHAT_NOT_BIND;
     }
     try {
-      const res = await grade.allPAssGrades(openId);
+      const res = await grade.allPassGrades(openId);
       if (!res.success) {
         return res.message;
       }
