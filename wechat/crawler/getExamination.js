@@ -86,7 +86,7 @@ const fetchExamination = (cookie) => {
     },
     host: website.url.hostname,
     method: 'GET',
-    path: website.url.userInfo,
+    path: website.url.examination,
   };
   return request(postData, options)
     .then((result) => {
