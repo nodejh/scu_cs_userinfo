@@ -53,6 +53,7 @@ const handle = {
     }
     try {
       const res = await grade.allPassGrades(openId);
+      console.log('res: ', res);
       if (!res.success) {
         return res.message;
       }
