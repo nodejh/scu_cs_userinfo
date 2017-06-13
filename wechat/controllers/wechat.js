@@ -35,6 +35,8 @@ const middleware = async (message) => {
   const isBind = await account.isBind(openId);
   const key = changeMessageTokey(message);
   console.log('Object.keys(handle).indexOf(key): ', Object.keys(handle).indexOf(key));
+  console.log('Object.keys(handle): ', Object.keys(handle));
+  console.log('key: ', key);
   if (Object.keys(handle).indexOf(key) !== -1) {
     return handle[key](isBind);
   }
