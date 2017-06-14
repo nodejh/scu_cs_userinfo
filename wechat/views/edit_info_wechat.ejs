@@ -51,7 +51,7 @@
             <div class="weui-cell">
               <div class="weui-cell__hd"><label class="weui-label"><%= con.label %></label></div>
               <div class="weui-cell__bd">
-                <input class="weui-input" id="<%= con.key %>" type="date" data-toggle="date" />
+                <input class="weui-input" id="<%= con.key %>" type="date" data-toggle="date" value="2000-01-01"/>
               </div>
             </div>
           <% } else if (con.type === 'textarea') { %>
@@ -60,7 +60,6 @@
               <div class="weui-cell">
                 <div class="weui-cell__bd">
                   <textarea class="weui-textarea" id="<%= con.key %>" placeholder="<%= con.label %>" rows="<%= con.row %>"></textarea>
-                  <div class="weui-textarea-counter"><span>0</span>/1000</div>
                 </div>
               </div>
             </div>
@@ -71,7 +70,7 @@
     <% }) %>
 
     <div class="weui-btn-area">
-      <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+      <a class="weui-btn weui-btn_primary" href="javascript:" id="save">确定</a>
     </div>
 
     <footer></footer>
@@ -87,12 +86,426 @@
 
 
     <script>
-      $("#showTooltips").click(function() {
-        var tel = $('#tel').val();
-        var code = $('#code').val();
-        if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
-        else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
-        else $.toptip('提交成功', 'success');
+      var form = {
+        name: {
+          key: 'name',
+          label: '姓名',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        gender: {
+          key: 'gender',
+          label: '性别',
+          type: 'select',
+          group: '基本信息',
+          value: '',
+          options: [
+            {
+              label: '男',
+              value: '男',
+            }, {
+              label: '女',
+              value: '女',
+            },
+          ],
+        },
+        class: {
+          key: 'class',
+          label: '班级',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        number: {
+          key: 'number',
+          label: '学号',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        native_place: {
+          key: 'native_place',
+          label: '籍贯',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        birthday: {
+          key: 'birthday',
+          label: '出生日期',
+          type: 'date',
+          group: '基本信息',
+          value: '',
+        },
+        ethnicity: {
+          key: 'ethnicity',
+          label: '名族',
+          type: 'input',
+          value: '',
+          group: '基本信息',
+        },
+        identity_card: {
+          key: 'identity_card',
+          label: '身份证',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        political_status: {
+          key: 'political_status',
+          label: '政治面貌',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        hobby: {
+          key: 'hobby',
+          label: '特长爱好',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        phone: {
+          key: 'phone',
+          label: '移动电话',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        dormitory: {
+          key: 'dormitory',
+          label: '宿舍',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        students_species: {
+          key: 'students_species',
+          label: '生源种类',
+          type: 'select',
+          group: '基本信息',
+          options: [
+            {
+              label: '统招',
+              value: '统招',
+            }, {
+              label: '国防生',
+              value: '国防生',
+            }, {
+              label: '自主招生',
+              value: '自主招生',
+            }, {
+              label: '预科直升',
+              value: '预科直升',
+            }, {
+              label: '定向',
+              value: '定向',
+            }, {
+              label: '其他',
+              value: '其他',
+            },
+          ],
+          value: '',
+        },
+        family_address: {
+          key: 'family_address',
+          label: '家庭住址',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        family_phone: {
+          key: 'family_phone',
+          label: '家庭电话',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        contact_address: {
+          key: 'contact_address',
+          label: '通信地址',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        zip_code: {
+          key: 'zip_code',
+          label: '邮编',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        professional_volunteer: {
+          key: 'professional_volunteer',
+          label: '专业志愿',
+          type: 'input',
+          group: '基本信息',
+          value: '',
+        },
+        father_name: {
+          key: 'father_name',
+          label: '父亲姓名',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        father_wokr_unit: {
+          key: 'father_wokr_unit',
+          label: '工作单位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        father_job: {
+          key: 'father_job',
+          label: '职位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        father_phone: {
+          key: 'father_phone',
+          label: '联系电话',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        father_qq: {
+          key: 'father_qq',
+          label: 'QQ',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        mother_name: {
+          key: 'mother_name',
+          label: '母亲姓名',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        mother_wokr_unit: {
+          key: 'mother_wokr_unit',
+          label: '工作单位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        mother_job: {
+          key: 'mother_job',
+          label: '工作单位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        mother_phone: {
+          key: 'mother_phone',
+          label: '联系电话',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        mother_qq: {
+          key: 'mother_qq',
+          label: 'QQ',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_1_name: {
+          key: 'familier_1_name',
+          label: '其他成员1',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_1_wokr_unit: {
+          key: 'familier_1_wokr_unit',
+          label: '工作单位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_1_appellation: {
+          key: 'familier_1_appellation',
+          label: '称呼',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_1_phone: {
+          key: 'familier_1_phone',
+          label: '联系电话',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_2_name: {
+          key: 'familier_2_name',
+          label: '其他成员2',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_2_wokr_unit: {
+          key: 'familier_2_wokr_unit',
+          label: '工作单位',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_2_appellation: {
+          key: 'familier_2_appellation',
+          label: '称呼',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+        familier_2_phone: {
+          key: 'familier_2_phone',
+          label: '联系电话',
+          type: 'input',
+          group: '家庭信息',
+          value: '',
+        },
+
+       // 经济情况
+        source_of_income: {
+          key: 'source_of_income',
+          label: '收入来源',
+          type: 'input',
+          group: '经济情况',
+          value: '',
+        },
+        household_income: {
+          key: 'household_income',
+          label: '家庭收入',
+          type: 'input',
+          placeholder: '家庭收入 (元/年)',
+          value: '',
+          group: '经济情况',
+        },
+        family_number: {
+          key: 'family_number',
+          label: '供养人口',
+          type: 'input',
+          group: '经济情况',
+          value: '',
+        },
+        student_number: {
+          key: 'student_number',
+          label: '在校学生',
+          type: 'input',
+          group: '经济情况',
+          value: '',
+        },
+        alimony: {
+          key: 'alimony',
+          label: '月生活费',
+          type: 'input',
+          group: '经济情况',
+          value: '',
+        },
+        is_loan: {
+          key: 'is_loan',
+          label: '申请助贷款',
+          type: 'select',
+          group: '经济情况',
+          value: '',
+          options: [{
+            label: '是',
+            value: '是',
+          }, {
+            label: '否',
+            value: '否',
+          }],
+        },
+        supplement: {
+          key: 'supplement',
+          label: '补充说明',
+          type: 'input',
+          group: '经济情况',
+          value: '',
+        },
+
+       // 学习情况
+        college_entrance_grade: {
+          key: 'college_entrance_grade',
+          label: '高考总分',
+          type: 'input',
+          group: '学习情况',
+          value: '',
+        },
+        english_grade: {
+          value: '',
+          key: 'english_grade',
+          label: '英语分数',
+          type: 'input',
+          group: '学习情况',
+        },
+        math_grade: {
+          key: 'math_grade',
+          label: '数学分数',
+          type: 'input',
+          value: '',
+          group: '学习情况',
+        },
+        synthesize_grade: {
+          key: 'synthesize_grade',
+          label: '综合分数',
+          type: 'input',
+          value: '',
+          group: '学习情况',
+        },
+        senior_awards: {
+          key: 'senior_awards',
+          label: '高中职务',
+          type: 'textarea',
+          row: 3,
+          value: '',
+          group: '学习情况',
+        },
+        senior_senior: {
+          key: 'senior_senior',
+          label: '高中奖项',
+          type: 'textarea',
+          row: 3,
+          group: '学习情况',
+          value: '',
+        },
+        senior_self_assessment: {
+          key: 'senior_self_assessment',
+          label: '高中阶段自我总结',
+          type: 'textarea',
+          row: 4,
+          group: '学习情况',
+          value: '',
+        },
+      };
+      $('#save').click(function () {
+        var data = {};
+        Object.keys(form).forEach((index) => {
+          // console.log('index: ', index);
+          data[index] = $('#' + index).val();
+        });
+        console.log('data: ', data);
+
+        // 更新字段
+        // data.birthday = new Date(data.birthday).to;
+        // if (data.birthday) {
+        //   data.birthday = new Date(data.birthday);
+        // } else {
+        //   data.birthday = null;
+        // }
+        console.log('data: ', data);
+        $.post('/api/info', data, function (res) {
+          if (res.success) {
+            $.toptip('保存个人信息成功', 'success');
+          } else {
+            $.toptip(res.message);
+          }
+        });
       });
     </script>
   </body>

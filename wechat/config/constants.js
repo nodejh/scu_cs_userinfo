@@ -27,7 +27,7 @@
        group: '基本信息',
        value: '',
      },
-     key: {
+     gender: {
        key: 'gender',
        label: '性别',
        type: 'select',
@@ -344,13 +344,14 @@
        key: 'is_loan',
        label: '申请助贷款',
        type: 'select',
+       group: '经济情况',
        value: '',
        options: [{
-         label: '是',
-         value: '是',
-       }, {
          label: '否',
          value: '否',
+       }, {
+         label: '是',
+         value: '是',
        }],
      },
      supplement: {
