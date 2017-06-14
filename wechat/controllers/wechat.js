@@ -5,11 +5,15 @@ const changeMessageTokey = require('./../helper/changeMessageToKey');
 const examination = require('./examination');
 
 const handle = {
-  1: (isBind) => {
-    console.log('isBind: ', isBind);
-    return isBind;
+  1: (openId, isBind) => {
+    if (!isBind) {
+      // 没有绑定
+      return constants.WECHAT_NOT_BIND;
+    }
+    account.info();
+    return `点击此链接编辑个人信息：<a href="http://115.159.65.172/mWechat/info?openId=${openId}>http://115.159.65.172/mWechat/info</a>`;
   },
-  2: isBind => isBind,
+  2: openId => openId,
   // 本学期成绩查询
   currentTermGrade: async (openId, isBind) => {
     if (!isBind) {

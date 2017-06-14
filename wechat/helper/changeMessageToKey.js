@@ -7,7 +7,7 @@
 const changeMessageTokey = (message) => {
   const data = message.toString();
   if (data === '1') {
-    return '1';
+    return '1'; // 个人信息填写
   }
   if (data === '2') {
     return '2';
