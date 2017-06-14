@@ -2,6 +2,16 @@ const query = require('./../utils/mysql').query;
 const { FORM_INFO } = require('./../config/constants');
 
 const editInfoPage = async (ctx) => {
+  // 判断是否有 openId
+  const { openId } = ctx.request.query;
+  if (openId) {
+    const sqlUsers = 'select id from users where open_id = ?';
+    const users = await query(sqlUsers, [openId]);
+    if (users.length > 0) {
+      ctx.session.id = users[0].id;
+    }
+  }
+
   // 获取基本信息
   const { id } = ctx.session;
   if (!id) {
