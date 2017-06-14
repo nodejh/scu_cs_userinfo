@@ -185,13 +185,14 @@ const handle = {
       return e.message;
     }
   },
-  // grade
+  // rank
   rank: async (openId, isBind) => {
     if (!isBind) {
       return constants.WECHAT_NOT_BIND;
     }
     try {
       const res = await account.rank(openId);
+      console.log('res: ', res);
       if (res.success) {
         return '您的个人信息如下\n' +
           `学号: ${res.info.number}\n` +

@@ -114,7 +114,7 @@ const rank = async (openId) => {
       return res;
     }
     res.success = true;
-    res.grade = grades[0];
+    res.info = grades[0];
     res.message = '查询排名成功';
     return res;
   } catch (e) {
