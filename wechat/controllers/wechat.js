@@ -99,6 +99,7 @@ const handle = {
       if (!res.success) {
         return res.message;
       }
+      text += `共有 ${res.examination} 门考试`;
       res.examination.forEach((item) => {
         text += `${item.date} ${item.time}\n`;
         text += `${item.class}\n`;
