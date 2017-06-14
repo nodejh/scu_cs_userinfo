@@ -84,7 +84,7 @@ const handle = {
       // eslint-disable-next-line
       console.log('text: ', text.length);
       // return '消息过长，无法显示 T_T';
-      return text.substring(0, 1200);
+      return text.length > 1024 ? `${text.substring(0, 1024)}...` : text;
     } catch (e) {
       return e.message;
     }
