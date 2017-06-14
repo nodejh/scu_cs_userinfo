@@ -10,7 +10,6 @@ const handle = {
       // 没有绑定
       return constants.WECHAT_NOT_BIND;
     }
-    account.info();
     return `点击此链接编辑个人信息：<a href="http://115.159.65.172/mWechat/info?openId=${openId}>http://115.159.65.172/mWechat/info</a>`;
   },
   2: openId => openId,
