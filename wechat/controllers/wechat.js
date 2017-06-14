@@ -70,20 +70,21 @@ const handle = {
         text += `总学分: ${term.sumCredit}\n`;
         text += `必修总学分: ${term.sumCreditObligatory}\n`;
         text += '\n';
-        term.list.forEach((item) => {
-          if (!isNaN(parseInt(item.grade, 10))) {
-            text += `${item.courseName} [${item.courseProperty}]\n`;
-            text += `${item.courseNumber}-${item.lessonNumber}\n`;
-            text += `学分: ${item.credit}\n`;
-            text += `成绩: ${item.grade}\n`;
-            text += '\n';
-          }
-        });
+        // term.list.forEach((item) => {
+        //   if (!isNaN(parseInt(item.grade, 10))) {
+        //     text += `${item.courseName} [${item.courseProperty}]\n`;
+        //     text += `${item.courseNumber}-${item.lessonNumber}\n`;
+        //     text += `学分: ${item.credit}\n`;
+        //     text += `成绩: ${item.grade}\n`;
+        //     text += '\n';
+        //   }
+        // });
         text += '\n';
       });
       // eslint-disable-next-line
       console.log('text: ', text);
-      return '消息过长，无法显示 T_T';
+      // return '消息过长，无法显示 T_T';
+      return text;
     } catch (e) {
       return e.message;
     }
