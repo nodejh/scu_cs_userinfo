@@ -64,9 +64,9 @@ const handle = {
       res.grades.forEach((term) => {
         text += `${term.term}\n`;
         text += `必修绩点: ${term.averageGpaObligatory}\n`;
-        text += `所有科目平均绩点: ${term.averageGpa}\n`;
-        text += `必修成绩: ${term.averageGradeObligatory}\n`;
-        text += `所有科目平均成绩: ${term.averageGrade}\n`;
+        text += `必修平均分: ${term.averageGradeObligatory}\n`;
+        text += `平均绩点: ${term.averageGpa}\n`;
+        text += `平均分: ${term.averageGrade}\n`;
         // text += `总学分: ${term.sumCredit}\n`;
         // text += `必修总学分: ${term.sumCreditObligatory}\n`;
         text += '\n';
@@ -82,9 +82,9 @@ const handle = {
         text += '\n';
       });
       // eslint-disable-next-line
-      console.log('text: ', text);
+      console.log('text: ', text.length);
       // return '消息过长，无法显示 T_T';
-      return text;
+      return text.substring(0, 2047);
     } catch (e) {
       return e.message;
     }

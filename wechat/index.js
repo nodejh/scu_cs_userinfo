@@ -5,23 +5,24 @@ const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const wechat = require('co-wechat');
-const session = require('koa-session');
+const session = require('koa-generic-session');
+const MysqlStore = require('koa-mysql-session');
 const config = require('./config/config');
 const routers = require('./routers/routers');
 const { middleware } = require('./controllers/wechat');
 
 const app = new Koa();
 
-// session keys
-app.keys = ['ssssss eeeee iiii'];
-const CONFIG = {
-  key: 'wechat:session',
-  maxAge: 86400000,
-  overwrite: true,
-  httpOnly: true,
-  signed: true,
-};
-app.use(session(CONFIG, app));
+const THIRTY_MINTUES = 30 * 60 * 1000;
+
+app.keys = ['my-session-secret'];
+app.use(session({
+  store: new MysqlStore(config.mysql),
+  rolling: true,
+  cookie: {
+    maxage: THIRTY_MINTUES,
+  },
+}));
 
 // 配置控制台日志中间件
 app.use(logger());
