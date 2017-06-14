@@ -9,8 +9,8 @@ const changeMessageTokey = (message) => {
   if (data === '1') {
     return '1'; // 个人信息填写
   }
-  if (data === '2') {
-    return '2';
+  if (data === '2') { // 排名
+    return 'rank';
   }
   if (data === '4' || data.indexOf('所有成绩') !== -1) {
     return 'allPassGrades';
@@ -27,7 +27,7 @@ const changeMessageTokey = (message) => {
   if (data.length <= 4 && data.indexOf('排名') !== -1) {
     return 'rank';
   }
-  if (data.length <= 4 && data.indexOf('信息') !== -1) {
+  if (data === '6' || (data.length <= 4 && data.indexOf('信息') !== -1)) {
     return 'info';
   }
   if (data.indexOf('+') !== -1) {

@@ -166,6 +166,45 @@ const handle = {
       return e.message;
     }
   },
+  info: async (openId, isBind) => {
+    if (!isBind) {
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const res = await account.info(openId);
+      if (res.success) {
+        return '您的个人信息如下\n' +
+          `姓名: ${res.info.name}\n` +
+          `性别: ${res.info.gender}\n` +
+          `年级: ${res.info.grade}\n` +
+          `学院: ${res.info.college}\n` +
+          `专业: ${res.info.major}`;
+      }
+      return res.message;
+    } catch (e) {
+      return e.message;
+    }
+  },
+  // grade
+  rank: async (openId, isBind) => {
+    if (!isBind) {
+      return constants.WECHAT_NOT_BIND;
+    }
+    try {
+      const res = await account.rank(openId);
+      if (res.success) {
+        return '您的个人信息如下\n' +
+          `学号: ${res.info.number}\n` +
+          `排名: ${res.info.ranking}\n` +
+          `平均成绩: ${res.info.average_grade}\n` +
+          `绩点: ${res.info.average_credit}\n` +
+          `加权学分成绩: ${res.info.average_credit_grade}`;
+      }
+      return res.message;
+    } catch (e) {
+      return e.message;
+    }
+  },
 };
 
 

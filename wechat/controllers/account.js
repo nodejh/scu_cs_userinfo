@@ -81,8 +81,52 @@ const bind = async (openId, number, password) => {
 };
 
 
+const info = async (openId) => {
+  const res = { success: false, message: '查询个人信息失败', info: {} };
+  try {
+    const sql = 'select * from users where open_id = ?';
+    const infos = await query(sql, [openId]);
+    if (infos.length > 0) {
+      res.success = true;
+      res.info = infos[0];
+      res.message = '查询个人信息成功';
+    }
+    return res;
+  } catch (e) {
+    return res;
+  }
+};
+
+const rank = async (openId) => {
+  const res = { success: false, message: '查询排名失败', info: {} };
+  try {
+    const sql = 'select number from users where open_id = ?';
+    const users = await query(sql, [openId]);
+    if (users.length === 0) {
+      res.message = '学号不存在';
+      return res;
+    }
+    const number = users[0].number;
+    const sqlRank = 'select * from grade where number = ?';
+    const grades = await query(sqlRank, [number]);
+    if (grades.length === 0) {
+      res.message = '您的排名信息尚未录入';
+      return res;
+    }
+    res.success = true;
+    res.grade = grades[0];
+    res.message = '查询排名成功';
+    return res;
+  } catch (e) {
+    return res;
+  }
+};
+
+
 module.exports = {
   isBind,
   unbind,
   bind,
+  info,
+  rank,
 };
