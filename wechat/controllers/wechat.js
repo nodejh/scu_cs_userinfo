@@ -67,8 +67,8 @@ const handle = {
         text += `所有科目平均绩点: ${term.averageGpa}\n`;
         text += `必修成绩: ${term.averageGradeObligatory}\n`;
         text += `所有科目平均成绩: ${term.averageGrade}\n`;
-        text += `总学分: ${term.sumCredit}\n`;
-        text += `必修总学分: ${term.sumCreditObligatory}\n`;
+        // text += `总学分: ${term.sumCredit}\n`;
+        // text += `必修总学分: ${term.sumCreditObligatory}\n`;
         text += '\n';
         // term.list.forEach((item) => {
         //   if (!isNaN(parseInt(item.grade, 10))) {
