@@ -5,7 +5,6 @@
 const router = require('koa-router')();
 const index = require('../controllers/home');
 
-
 router.get('/', index.indexPage);
 
 
