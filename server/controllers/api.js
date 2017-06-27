@@ -95,7 +95,47 @@ const submit=async(ctx)=> {
         ctx.body = result;
     }
 };
+const signed=async(ctx)=>{
+    const result = {
+        success: false
+    };
+    const reqData = ctx.request.body;
+    console.log(reqData);
+    try {
+       const vacation_name=reqData.vacation_name;
+        const vacation_data=reqData.vacation_data;
+        const vacation_grade=reqData.vacation_grade;
+        var nowTime=new Data();
 
+        const sql = 'INSERT INTO grade (number, average_grade, average_credit, average_credit_grade, ranking,grade,class) VALUES ?';
+        const values = sheetObject.map((item) => {
+            const keys = Object.keys(item);
+            return [
+                parseInt(item[keys[1]].replace(/\s+/g, ''), 10),
+                parseFloat(item[keys[2]].replace(/\s+/g, '')),
+                parseFloat(item[keys[3]].replace(/\s+/g, '')),
+                parseFloat(item[keys[4]].replace(/\s+/g, '')),
+                parseInt(item[keys[5]].replace(/\s+/g, ''), 10),
+                reqData.grade,
+                reqData.class,
+            ];
+        });
+        const res= await query(sql, [values]);
+        console.log(res);
+        if (res != null) {
+            result.success = true;
+        }
+    }
+    catch (e) {
+        // console.log('e: ', e);
+        result.error = e;
+        result.message = e.message || '提交失败，请重试';
+    } finally {
+        console.log(result);
+        ctx.body = result;
+    }
+
+}
 
 module.exports = {
   gradeList,login,submit

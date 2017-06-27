@@ -11,5 +11,6 @@ router.get('/grade', api.gradeList);
 router.post('/upload', upload.index);
 router.post('/login',checkNotLoginAdminJson);
 router.post('/login',api.login);
-router.post('/submit',api.submit)
+router.post('/submit',api.submit);
+router.post('/signin',api.signin);
 module.exports = router;
